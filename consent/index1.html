@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download HTML as Image</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h1>Your Content Here</h1>
+        <p>This is an example of how to save HTML content as an image.</p>
+        <button id="saveBtn">Save as Image</button>
+    </div>
+
+    <script>
+        document.getElementById('saveBtn').addEventListener('click', function() {
+            html2canvas(document.getElementById('content')).then(canvas => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'saved_content.png'; // Change to 'saved_content.jpg' for JPG format
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    </script>
+</body>
+</html>
