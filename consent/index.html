@@ -197,7 +197,7 @@
 
     <script>
         document.getElementById('saveBtn').addEventListener('click', function () {
-            resizeSignature();
+           // resizeSignature();
             // Hide the save button
             var saveBtn = document.getElementById('saveBtn');
             var cltBtn = document.getElementById('cltBtn');
@@ -252,12 +252,17 @@
             document.getElementById('rslab').textContent = 'Relationship: ' + this.value;
         });
 
-        function resizeSignature() {
+    
+            //resize and add it in bottom left corner
+        function resizeSignature{
+            
             var ratio = Math.max(window.devicePixelRatio || 1, 1); // Set a default value if devicePixelRatio is not available
             canvas.width = canvas.offsetWidth * ratio;
             canvas.height = canvas.offsetHeight * ratio;
             signaturePad.fromData(signaturePad.toData());
-        }
+        
+        } 
+            
         function roundToNearest10Minutes(date) {
             const minutes = Math.round(date.getMinutes() / 10) * 10;
             date.setMinutes(minutes);
