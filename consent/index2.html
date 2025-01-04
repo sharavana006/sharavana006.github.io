@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     <style>
         body {
             font-size: 20px;
-            overflow-x: hidden; /* Prevents horizontal scrolling */
+            overflow-x: hidden;
+            /* Prevents horizontal scrolling */
         }
 
         .container {
@@ -25,9 +27,13 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        body { font-size: 20px; font-family: 'Times New Roman', Times, serif; 
-        overflow-x: hidden; 
-    }
+
+        body {
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            overflow-x: hidden;
+        }
+
         .form-title {
             text-align: center;
             margin: 20px 0;
@@ -41,7 +47,7 @@
         .signature-pad {
             width: 100%;
             height: 200px;
-            
+
         }
 
         textarea:focus,
@@ -55,7 +61,8 @@
 
         input {
             font-weight: 600 !important;
-            font-size: 20px; font-family: 'Times New Roman', Times, serif; 
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .d-inline1 {
@@ -64,8 +71,12 @@
             outline: none;
             transition: border-bottom-color 0.3s ease;
         }
+
         .form-control {
-            color:#000000 !important;
+            color: #000000 !important;
+        }
+        .form-group{
+            margin-bottom: 0px !important;
         }
         .d-inline {
             border-radius: 0px;
@@ -90,7 +101,8 @@
                 height: 150px;
             }
 
-            #saveBtn, #cltBtn {
+            #saveBtn,
+            #cltBtn {
                 bottom: 5px;
                 right: 5px;
             }
@@ -101,8 +113,8 @@
 <body>
     <div class="container" id="container">
         <div class="header">
-            
-            <img src="https://sharavana006.github.io/consent/header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
+
+            <img src="header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
         </div>
         <div class="content" style="margin: 40px;">
             <div class="form-title">
@@ -117,7 +129,8 @@
                             style="min-width:20em" class="form-control d-inline w-auto custom-input" id='rname'
                             placeholder="Your Name">, the undersigned, do hereby agree and give my consent for Mr./Mrs.
                         <input oninput="this.value = this.value.toUpperCase()" type="text" style="min-width:20em"
-                            class="form-control d-inline w-auto" placeholder="Patient name" id="patientName"> (Relationship
+                            class="form-control d-inline w-auto" placeholder="Patient name" id="patientName">
+                        (Relationship
                         <input oninput="this.value = this.value.toUpperCase()" type="text" id="rship"
                             class="form-control d-inline w-auto" placeholder="Relationship">), for admission to Saveetha
                         Medical College Hospital. I do hereby give consent and authorize to conduct routine diagnostic
@@ -125,7 +138,8 @@
                     </p>
                 </div>
                 <div style="margin-left: -15px;" class="form-group">
-                    <canvas id="signature-pad" style="touch-action: none; user-select: none;" class="signature-pad"></canvas>
+                    <canvas id="signature-pad" style="touch-action: none; user-select: none;"
+                        class="signature-pad"></canvas>
                 </div>
                 <b>
                     <div class="row">
@@ -159,7 +173,8 @@
                         </div>
                         <div class="col-xs-6 col-md-6">
                             <div class="form-group row">
-                                <label style="text-align: end;" for="Relationship" class="col-sm-4 col-form-label">Time:</label>
+                                <label style="text-align: end;" for="Relationship"
+                                    class="col-sm-4 col-form-label">Time:</label>
                                 <div class="col-sm-8">
                                     <input type="time" class="form-control d-inline1" id="time">
                                 </div>
@@ -169,17 +184,20 @@
                 </b>
             </form>
         </div>
+        </br></br></br></br></br></br></br></br>
         <div class="footer">
-            <img src="https://sharavana006.github.io/consent/footer.png" alt="SIMATS Logo" class="img-fluid">
+            <img src="footer.png" alt="SIMATS Logo" class="img-fluid">
         </div>
         <div class="text-center my-4">
-            <button id="saveBtn" class="btn btn-primary">Save as Image</button>
-            <button id="cltBtn" class="btn btn-primary">Clear sign</button>
+            <button id="cltBtn" class="btn btn-danger">Clear sign</button>
+            <button id="saveBtn" class="btn btn-success">Save as Image</button>
+
         </div>
     </div>
 
     <script>
         document.getElementById('saveBtn').addEventListener('click', function () {
+           // resizeSignature();
             // Hide the save button
             var saveBtn = document.getElementById('saveBtn');
             var cltBtn = document.getElementById('cltBtn');
@@ -214,8 +232,8 @@
         });
 
         var canvas = document.getElementById('signature-pad');
-        var signaturePad = new SignaturePad(canvas,{ backgroundColor: 'rgb(255, 255, 255)'});
-        
+        var signaturePad = new SignaturePad(canvas, { backgroundColor: 'rgb(255, 255, 255)' });
+
 
         document.addEventListener('DOMContentLoaded', (event) => {
             const today = new Date().toISOString().split('T')[0];
@@ -234,6 +252,17 @@
             document.getElementById('rslab').textContent = 'Relationship: ' + this.value;
         });
 
+    
+            //resize and add it in bottom left corner
+        function resizeSignature(){
+            
+            var ratio = Math.max(window.devicePixelRatio || 1, 1); // Set a default value if devicePixelRatio is not available
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            signaturePad.fromData(signaturePad.toData());
+        
+        } 
+            
         function roundToNearest10Minutes(date) {
             const minutes = Math.round(date.getMinutes() / 10) * 10;
             date.setMinutes(minutes);
@@ -251,30 +280,22 @@
             timeInput.value = `${hours}:${minutes}`;
         }
         function resizeCanvas() {
-  // When zoomed out to less than 100%, for some very strange reason,
-  // some browsers report devicePixelRatio as less than 1
-  // and only part of the canvas is cleared then.
-  var ratio =  Math.max(window.devicePixelRatio || 1, 1);
 
-  // This part causes the canvas to be cleared
-  canvas.width = canvas.offsetWidth * ratio;
-  canvas.height = canvas.offsetHeight * ratio;
-  canvas.getContext("2d").scale(ratio, ratio);
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
 
-  // This library does not listen for canvas changes, so after the canvas is automatically
-  // cleared by the browser, SignaturePad#isEmpty might still return false, even though the
-  // canvas looks empty, because the internal data of this library wasn't cleared. To make sure
-  // that the state of this library is consistent with visual state of the canvas, you
-  // have to clear it manually.
-  signaturePad.clear();
-}
 
-// On mobile devices it might make more sense to listen to orientation change,
-// rather than window resize events.
-window.onresize = resizeCanvas;
-resizeCanvas();
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+
+            //signaturePad.clear();
+        }
+
+        window.onresize = resizeCanvas;
+        resizeCanvas();
 
         setDefaultTime();
     </script>
 </body>
+
 </html>
