@@ -102,7 +102,7 @@
     <div class="container" id="container">
         <div class="header">
             
-            <img src="https://sharavana006.github.io/consent/header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
+            <img src="header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
         </div>
         <div class="content" style="margin: 40px;">
             <div class="form-title">
@@ -169,12 +169,14 @@
                 </b>
             </form>
         </div>
+    </br></br></br></br>
         <div class="footer">
-            <img src="https://sharavana006.github.io/consent/footer.png" alt="SIMATS Logo" class="img-fluid">
+            <img src="footer.png" alt="SIMATS Logo" class="img-fluid">
         </div>
         <div class="text-center my-4">
-            <button id="saveBtn" class="btn btn-primary">Save as Image</button>
-            <button id="cltBtn" class="btn btn-primary">Clear sign</button>
+            <button id="cltBtn" class="btn btn-danger">Clear sign</button>
+            <button id="saveBtn" class="btn btn-success">Save as Image</button>
+            
         </div>
     </div>
 
@@ -233,7 +235,32 @@
         document.getElementById('rship').addEventListener('keyup', function () {
             document.getElementById('rslab').textContent = 'Relationship: ' + this.value;
         });
+        
+    // Function to shrink the signature pad by 0.5
+    function shrinkSignature() {
+        const originalCanvas = document.getElementById('signature-pad');
+        const originalContext = originalCanvas.getContext('2d');
+        const originalImageData = originalCanvas.toDataURL('image/png');
 
+        const shrinkCanvas = document.createElement('canvas');
+        shrinkCanvas.width = originalCanvas.width * 0.5;
+        shrinkCanvas.height = originalCanvas.height * 0.5;
+        const shrinkContext = shrinkCanvas.getContext('2d');
+
+        const image = new Image();
+        image.onload = function () {
+            shrinkContext.drawImage(image, 0, 0, shrinkCanvas.width, shrinkCanvas.height);
+            originalContext.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
+            originalCanvas.width = shrinkCanvas.width;
+            originalCanvas.height = shrinkCanvas.height;
+            originalContext.drawImage(shrinkCanvas, 0, 0);
+        };
+        image.src = originalImageData;
+    }
+
+    // Add event listener to shrink the signature after signing
+    canvas.addEventListener('mouseup', shrinkSignature);
+    canvas.addEventListener('touchend', shrinkSignature);
         function roundToNearest10Minutes(date) {
             const minutes = Math.round(date.getMinutes() / 10) * 10;
             date.setMinutes(minutes);
