@@ -64,7 +64,9 @@
             outline: none;
             transition: border-bottom-color 0.3s ease;
         }
-
+        .form-control {
+            color:#000000 !important;
+        }
         .d-inline {
             border-radius: 0px;
             border: none;
@@ -99,7 +101,8 @@
 <body>
     <div class="container" id="container">
         <div class="header">
-            <img src="header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
+            
+            <img src="https://sharavana006.github.io/consent/header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
         </div>
         <div class="content" style="margin: 40px;">
             <div class="form-title">
@@ -167,7 +170,7 @@
             </form>
         </div>
         <div class="footer">
-            <img src="footer.png" alt="SIMATS Logo" class="img-fluid">
+            <img src="https://sharavana006.github.io/consent/footer.png" alt="SIMATS Logo" class="img-fluid">
         </div>
         <div class="text-center my-4">
             <button id="saveBtn" class="btn btn-primary">Save as Image</button>
@@ -185,7 +188,7 @@
             cltBtn.classList.add('hide');
 
             // Capture the image
-            html2canvas(document.getElementById('container'), { scale: 0.8 }).then(canvas => {
+            html2canvas(document.getElementById('container'), { scale: 2 }).then(canvas => {
                 const image = canvas.toDataURL('image/png');
                 const link = document.createElement('a');
 
