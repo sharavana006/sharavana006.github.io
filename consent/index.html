@@ -152,12 +152,16 @@
 
     <div class="text-center my-4">
         <button id="saveBtn" class="btn btn-primary">Save as Image</button>
+        <button id="cltBtn" class="btn btn-primary">Clear sign</button>
     </div>
     <script>
         document.getElementById('saveBtn').addEventListener('click', function () {
             // Hide the save button
             var saveBtn = document.getElementById('saveBtn');
+            var cltBtn = document.getElementById('cltBtn');
+            
             saveBtn.classList.add('hide');
+            cltBtn.classList.add('hide');   
 
             // Capture the image
             html2canvas(document.getElementById('container')).then(canvas => {
@@ -181,6 +185,7 @@
 
                 // Show the save button again
                 saveBtn.classList.remove('hide');
+                cltBtn.classList.remove('hide');
             });
         });
     </script>
@@ -196,6 +201,9 @@
             document.getElementById('date').value = today;
         });
         $("#sign").dblclick(function () {
+            signaturePad.clear();
+        });
+        $("#cltBtn").click(function () {
             signaturePad.clear();
         });
         $("#rname").keyup(function () {
