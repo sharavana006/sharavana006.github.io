@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inpatient Consent Form</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         .header, .footer {
             text-align: center;
             margin-bottom: 20px;
         }
-		
         .form-title {
             text-align: center;
             margin: 20px 0;
@@ -21,100 +20,124 @@
             margin-bottom: 1.5rem;
         }
         .signature-pad {
-           // border: 1px solid #000;
+            border: 1px solid #000; /* Uncommented border */
             width: 40%;
             height: 200px;
         }
-		textarea:focus, input:focus{
-			outline: none;
-		}*:focus {
-			box-shadow: none !important;
-		}
-    .d-inline1  { border-radius:0px; border: none;  outline: none; transition: border-bottom-color 0.3s ease; }
-	.d-inline  { border-radius:0px; border: none; border-bottom: 1px solid ; outline: none; transition: border-bottom-color 0.3s ease; }</style>
+        textarea:focus, input:focus {
+            outline: none;
+        }
+        *:focus {
+            box-shadow: none !important;
+        }
+        .d-inline1 {
+            border-radius: 0px;
+            border: none;
+            outline: none;
+            transition: border-bottom-color 0.3s ease;
+        }
+        .d-inline {
+            border-radius: 0px;
+            border: none;
+            border-bottom: 1px solid;
+            outline: none;
+            transition: border-bottom-color 0.3s ease;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 <body style="font-size:20px">
     <div class="container" id="container">
         <div class="header">
-            <img   src="header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
-           
+            <img src="header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
         </div>
-		<div class="content" style="margin: 40px;">
-        <div class="form-title">
-            <u><h4>INPATIENT CONSENT FORM</h4></u>
+        <div class="content" style="margin: 40px;">
+            <div class="form-title">
+                <u><h4>INPATIENT CONSENT FORM</h4></u>
+            </div>
+            <form>
+                <div class="form-group">
+                    <p align="justify">I, <input oninput="this.value = this.value.toUpperCase()" type="text" style="min-width:20em" class="form-control d-inline w-auto custom-input" id='rname' placeholder="Your Name">,
+                    the undersigned, do hereby agree and give my consent for Mr./Mrs.
+                    <input oninput="this.value = this.value.toUpperCase()" type="text" style="min-width:20em" class="form-control d-inline w-auto" placeholder="Patient name" id="patientName"> (Relationship <input oninput="this.value = this.value.toUpperCase()" type="text" id="rship" class="form-control d-inline w-auto" placeholder="Relationship">), for admission to Saveetha Medical College Hospital. I do hereby give consent and authorize to conduct routine diagnostic tests, relevant special tests, procedures, and the administration of medications.</p>
+                </div>
+                <div class="form-group" style="margin-left: -15px;">
+                    <canvas id="signature-pad" class="signature-pad"></canvas>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group row">
+                            <label for="relativeName" class="col-form-label">Patient/Relative's Signature:</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group row">
+                            <label for="relativeName" class="col-form-label" id="rlab">Relative Name:</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group row">
+                            <label style="text-align: end;" for="relativeName" class="col-sm-4 col-form-label">Date:</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control d-inline1" id="date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group row">
+                            <label for="Relationship" class="col-form-label" id="rslab">Relationship:</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group row">
+                            <label style="text-align: end;" for="Relationship" class="col-sm-4 col-form-label">Time:</label>
+                            <div class="col-sm-8">
+                                <input type="time" class="form-control d-inline1" id="time">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <form>
-            <div class="form-group">
-                <p align="justify">I, <input  oninput="this.value = this.value.toUpperCase()" type="text" style="min-width:20em" class="form-control d-inline w-auto custom-input" id='rname' placeholder="Your Name">,
-				the undersigned, do hereby agree and give my consent for Mr./Mrs.
-				<input  oninput="this.value = this.value.toUpperCase()" type="text" style="min-width:20em"  
-				class="form-control d-inline w-auto" placeholder="Patient name"> (Relationship <input  oninput="this.value = this.value.toUpperCase()" type="text" id="rship" class="form-control d-inline w-auto" placeholder="Relationship">), for admission to Saveetha Medical College Hospital. I do hereby give consent and authorize to conduct routine diagnostic tests, relevant special tests, procedures, and the administration of medications.</p>
-            </div>
-            <div style="    margin-left: -15px;" class="form-group">
-                
-                <canvas id="signature-pad" class="signature-pad"></canvas>
-                
-				
-            </div>
-			
-			<div class="row">
-			<div class="col-xs-6 col-md-6">
-           
-			<div class="form-group row"> <label for="relativeName" class="col-form-label">Patient/Relative's Signature:</label> 
-				
-			</div>
-			</div>
-			
-			</div>
-			
-			<div class="row">
-			<div class="col-xs-6 col-md-6">
-           
-			<div class="form-group row"> <label for="relativeName" class="col-form-label" id="rlab">Relative Name:</label> 
-				
-			</div>
-			</div>
-			<div class="col-xs-6 col-md-6">
-			 <div class="form-group row"> <label style="text-align: end;" for="relativeName" class="col-sm-4 col-form-label">Date:</label> 
-				<div class="col-sm-8"> <input type="date" class="form-control d-inline1" id="date"> </div>
-            </div>
-			</div>
-			</div>
-			<div class="row">
-			<div class="col-xs-6 col-md-6">
-        
-			 <div class="form-group row"> <label for="Relationship" class=" col-form-label" id="rslab">Relationship:</label> 
-				
-            </div>
-			</div>
-           <div class="col-xs-6 col-md-6">
-                <div class="form-group row"> <label style="text-align: end;" for="Relationship" class="col-sm-4 col-form-label">Time:</label> 
-				<div class="col-sm-8">
-                <input type="time" class="form-control d-inline1" id="time">
-				</div>
-            
-			</div>
-			</div>
-        </form>
-		</div>
         <div class="footer">
-            <img  src="footer.png" alt="SIMATS Logo" class="img-fluid">
-           
+            <img src="footer.png" alt="SIMATS Logo" class="img-fluid">
         </div>
     </div>
-</div>
-        <button id="saveBtn">Save as Image</button>
-
+    <button id="saveBtn">Save as Image</button>
     <script>
         document.getElementById('saveBtn').addEventListener('click', function() {
+            // Hide the save button
+            var saveBtn = document.getElementById('saveBtn');
+            saveBtn.classList.add('hide');
+            
+            // Capture the image
             html2canvas(document.getElementById('container')).then(canvas => {
                 const image = canvas.toDataURL('image/png');
                 const link = document.createElement('a');
+                
+                // Get current date in yyyy-mm-dd format
+                const today = new Date().toISOString().split('T')[0];
+                
+                // Get patient name from input field
+                const patientName = document.getElementById('patientName').value;
+                
+                // Format the file name
+                const fileName = `${today}-${patientName}.png`;
+                
                 link.href = image;
-                link.download = 'saved_content.png'; // Change to 'saved_content.jpg' for JPG format
+                link.download = fileName; // Use the formatted file name
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+                
+                // Show the save button again
+                saveBtn.classList.remove('hide');
             });
         });
     </script>
@@ -125,20 +148,19 @@
     <script>
         var canvas = document.getElementById('signature-pad');
         var signaturePad = new SignaturePad(canvas);
-
-       
-		document.addEventListener('DOMContentLoaded', (event) => { const today = new Date().toISOString().split('T')[0]; document.getElementById('date').value = today; });
-		$("#sign").dblclick(function(){
-	  signaturePad.clear();
-	});
-	$("#rname").keyup(function(){
-	  $("#rlab").text('Relative Name: '+$("#rname").val());
-	});
-	
-	$("#rship").keyup(function(){
-	  $("#rslab").text('Relationship: '+$("#rship").val());
-	});
-	
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+        });
+        $("#sign").dblclick(function() {
+            signaturePad.clear();
+        });
+        $("#rname").keyup(function() {
+            $("#rlab").text('Relative Name: ' + $("#rname").val());
+        });
+        $("#rship").keyup(function() {
+            $("#rslab").text('Relationship: ' + $("#rship").val());
+        });
     </script>
 </body>
 </html>
