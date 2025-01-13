@@ -155,7 +155,7 @@
                                 <label style="text-align: end;" for="relativeName"
                                     class="col-sm-4 col-form-label">Date:</label>
                                 <div class="col-sm-8">
-                                    <input type="date" class="form-control d-inline1" id="date">
+                                    <input type="date" class="form-control d-inline1" id="date" style="padding-bottom: 0px;">
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,8 @@
                                 <label style="text-align: end;" for="Relationship"
                                     class="col-sm-4 col-form-label">Time:</label>
                                 <div class="col-sm-8">
-                                    <input type="time" class="form-control d-inline1" id="time">
+                                    <input type="time" class="form-control d-inline1" id="time" style="padding-bottom: 0px;">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -290,6 +291,14 @@
         resizeCanvas();
 
         setDefaultTime();
+        function convertTo12HourFormat(time) {
+            let [hours, minutes] = time.split(':');
+            hours = parseInt(hours);
+            const period = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert hour '0' to '12' for midnight
+            return `${hours}:${minutes} ${period}`;
+        }
+
     </script>
 </body>
 
