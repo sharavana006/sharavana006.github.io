@@ -240,9 +240,10 @@ resizeCanvas();
             // Hide the save button
             var saveBtn = document.getElementById('saveBtn');
             var cltBtn = document.getElementById('cltBtn');
-			var cltBtn = document.getElementById('openbtn');
+			var cltBtn1 = document.getElementById('openbtn');
             saveBtn.classList.add('hide');
             cltBtn.classList.add('hide');
+			cltBtn1.classList.add('hide');
 
             // Capture the image
             html2canvas(document.getElementById('container'), { scale: 2 }).then(canvas => {
@@ -266,7 +267,7 @@ resizeCanvas();
 
                 // Show the save button again
                 saveBtn.classList.remove('hide');
-				cltBtn.classList.remove('hide');
+				cltBtn1.classList.remove('hide');
 				
                 cltBtn.classList.remove('hide');
             });
