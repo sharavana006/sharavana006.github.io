@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inpatient Consent Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <style>
+	
+    #signature-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #popup-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+        body {
+            font-size: 20px;
+            overflow-x: hidden;
+            /* Prevents horizontal scrolling */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header,
+        .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            overflow-x: hidden;
+        }
+
+        .form-title {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .signature-pad {
+          margin-left: 10px;
+		   width:350px;
+		   height:150px;
+
+        }
+
+        textarea:focus,
+        input:focus {
+            outline: none;
+        }
+
+        *:focus {
+            box-shadow: none !important;
+        }
+
+        input {
+            font-weight: 600 !important;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .d-inline1 {
+            border-radius: 0px;
+            border: none;
+            outline: none;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .form-control {
+            color: #000000 !important;
+        }
+        .form-group{
+            margin-bottom: 0px !important;
+        }
+        .d-inline {
+            border-radius: 0px;
+            border: none;
+            border-bottom: 1px solid;
+            outline: none;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        /* Media queries for different screen sizes */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .signature-pad {
+                height: 150px;
+            }
+
+            #saveBtn,
+            #cltBtn {
+                bottom: 5px;
+                right: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="header">
+
+            <img src="header2.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
+        </div>
+        <div class="content" style="margin: 40px;">
+            
+            <form onSubmit="return false;">
+                <div class="form-group">
+                    <p align="justify">I, <input oninput="this.value = this.value.toUpperCase()" autofocus type="text"
+                            style="min-width:20em" class="form-control d-inline w-auto custom-input" id='rname'
+                            placeholder="Your Name">, the undersigned, do hereby agree and give my consent for Mr./Mrs.
+                        <input oninput="this.value = this.value.toUpperCase()" type="text" style="min-width:20em"
+                            class="form-control d-inline w-auto" placeholder="Patient name" id="patientName">
+                        (Relationship
+                        <input oninput="this.value = this.value.toUpperCase()" type="text" id="rship"
+                            class="form-control d-inline w-auto" placeholder="Relationship">), for admission to Saveetha
+                        Medical College Hospital. I do hereby give consent and authorize to conduct routine diagnostic
+                        tests, relevant special tests, procedures, and the administration of medications.
+                    </p>
+                </div>
+                <div style="margin-left: -15px;" class="form-group">
+                    <canvas onclick="openSignaturePopup()"; id="signature-pad" style="touch-action: none; user-select: none;" 
+                        class="signature-pad"></canvas>
+                </div>
+				 <div id="signature-popup">
+    <div id="popup-container">
+      <canvas id="popup-signature-pad" width="800" height="300"></canvas>
+      <br />
+      <button onclick="saveSignature()">Save</button>
+      <button onclick="closeSignaturePopup()">Close</button>
+    </div>
+  </div>
+				  <button style="display:none" id="openbtn" class="" onclick="openSignaturePopup()">Open Popup to Sign</button>
+                <b>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6" style="padding-left: 30px;">
+                            <div class="form-group row">
+                                <label for="relativeName" class="col-form-label">Patient/ Relative's Signature:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6" style="padding-left: 30px;">
+                            <div class="form-group row">
+                                <label for="relativeName" class="col-form-label" id="rlab">Relative Name:</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6" style="padding-left: 0px;">
+                            <div class="form-group row">
+                                <label style="text-align: end;" for="relativeName"
+                                    class="col-sm-4 col-form-label">Date:</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control d-inline1" id="date" style="padding-bottom: 0px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6" style="padding-left: 30px;">
+                            <div class="form-group row">
+                                <label for="Relationship" class="col-form-label" id="rslab">Relationship:</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6" style="padding-left: 0px;">
+                            <div class="form-group row">
+                                <label style="text-align: end;" for="Relationship"
+                                    class="col-sm-4 col-form-label">Time:</label>
+                                <div class="col-sm-8">
+                                    <input type="time" class="form-control d-inline1" id="time" style="padding-bottom: 0px;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </b>
+            </form>
+        </div>
+        </br></br></br></br></br></br>
+        <div class="footer">
+            <img src="footer.png" alt="SIMATS Logo" class="img-fluid">
+        </div>
+        <div class="text-center my-4">
+            <button id="cltBtn" class="btn btn-danger">Clear sign</button>
+            <button id="saveBtn" class="btn btn-success">Save as Image</button>
+
+        </div>
+		
+    </div>
+
+    <script>
+			 let signaturePad = null; // For displaying signature on the main page
+    let popupSignaturePad = null; // For drawing in the popup
+var canvas = null;
+    // Initialize the main signature pad
+    window.onload = function () {
+        canvas = document.getElementById('signature-pad');
+        // signaturePad = new SignaturePad(canvas, { backgroundColor: 'rgb(255, 255, 255)' });
+resizeCanvas();
+    };
+	
+        document.getElementById('saveBtn').addEventListener('click', function () {
+           // resizeSignature();
+            // Hide the save button
+            var saveBtn = document.getElementById('saveBtn');
+            var cltBtn = document.getElementById('cltBtn');
+			var cltBtn = document.getElementById('openbtn');
+            saveBtn.classList.add('hide');
+            cltBtn.classList.add('hide');
+
+            // Capture the image
+            html2canvas(document.getElementById('container'), { scale: 2 }).then(canvas => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+
+                // Get current date in yyyy-mm-dd format
+                const today = new Date().toISOString().split('T')[0];
+
+                // Get patient name from input field
+                const patientName = document.getElementById('patientName').value;
+
+                // Format the file name
+                const fileName = `${today}-${patientName}.png`;
+
+                link.href = image;
+                link.download = fileName; // Use the formatted file name
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Show the save button again
+                saveBtn.classList.remove('hide');
+				cltBtn.classList.remove('hide');
+				
+                cltBtn.classList.remove('hide');
+            });
+        });
+		
+
+
+    // Function to open the popup
+    function openSignaturePopup() {
+	
+      const popup = document.getElementById('signature-popup');
+      popup.style.display = 'flex'; // Show the popup
+	  // Initialize the popup signature pad
+      const canvas = document.getElementById('popup-signature-pad');
+      popupSignaturePad = new SignaturePad(canvas,{ backgroundColor: 'rgb(255, 255, 255)' });
+	  return false;
+    }
+
+    // Function to close the popup
+    function closeSignaturePopup() {
+      const popup = document.getElementById('signature-popup');
+      popup.style.display = 'none'; // Hide the popup
+    }
+
+    // Function to save the signature
+    function saveSignature() {
+  if (popupSignaturePad.isEmpty()) {
+    alert('Please provide a signature.');
+    return;
+  }
+
+  // Get the data URL of the signature from the popup
+  const dataURL = popupSignaturePad.toDataURL();
+
+  // Render it on the main signature pad
+  const img = new Image();
+  img.onload = function () {
+    const mainCanvas = document.getElementById('signature-pad');
+    const ctx = mainCanvas.getContext('2d');
+
+    // Clear previous signature
+    ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+
+    // Calculate scaling to fit within half of the canvas width and maintain aspect ratio
+    const maxWidth = mainCanvas.width * 0.5; // Restrict to half of canvas width
+    const maxHeight = mainCanvas.height; // Use full height of canvas
+    let scaledWidth = img.width;
+    let scaledHeight = img.height;
+
+    // Scale down if image exceeds maximum dimensions
+    if (scaledWidth > maxWidth || scaledHeight > maxHeight) {
+      const scale = Math.min(maxWidth / scaledWidth, maxHeight / scaledHeight);
+      scaledWidth *= scale;
+      scaledHeight *= scale;
+    }
+console.log(scaledWidth);
+console.log(scaledHeight);
+    // Draw the image on the left side of the canvas
+    const x = 5; // Left alignment
+    const y = (mainCanvas.height - scaledHeight) / 2; // Center vertically
+
+    //ctx.drawImage(img, 0, 10, img.width, img.height, x, y, scaledWidth, scaledHeight);
+	ctx.drawImage(img, 0, 10, img.width, img.height, x, 10, scaledWidth, scaledHeight);
+
+    closeSignaturePopup(); // Close after saving
+  };
+
+  img.src = dataURL; // Set image source to data URL of drawn signature
+}
+
+	
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+        });
+
+        document.getElementById('cltBtn').addEventListener('click', function () {
+            signaturePad.clear();
+        });
+
+        document.getElementById('rname').addEventListener('keyup', function () {
+            document.getElementById('rlab').textContent = 'Relative Name: ' + this.value;
+        });
+
+        document.getElementById('rship').addEventListener('keyup', function () {
+            document.getElementById('rslab').textContent = 'Relationship: ' + this.value;
+        });
+
+    
+            //resize and add it in bottom left corner
+        function resizeSignature(){
+            
+            var ratio = Math.max(window.devicePixelRatio || 1, 1); // Set a default value if devicePixelRatio is not available
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            signaturePad.fromData(signaturePad.toData());
+        
+        } 
+            
+        function roundToNearest10Minutes(date) {
+            const minutes = Math.round(date.getMinutes() / 10) * 10;
+            date.setMinutes(minutes);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            return date;
+        }
+
+        function setDefaultTime() {
+            const timeInput = document.getElementById('time');
+            const currentTime = new Date();
+            const roundedTime = roundToNearest10Minutes(currentTime);
+            const hours = String(roundedTime.getHours()).padStart(2, '0');
+            const minutes = String(roundedTime.getMinutes()).padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+        }
+        function resizeCanvas() {
+
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+
+            //signaturePad.clear();
+        }
+
+        window.orientationchange = resizeCanvas;
+        
+
+        setDefaultTime();
+        function convertTo12HourFormat(time) {
+            let [hours, minutes] = time.split(':');
+            hours = parseInt(hours);
+            const period = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert hour '0' to '12' for midnight
+            return `${hours}:${minutes} ${period}`;
+        }
+
+    </script>
+</body>
+
+</html>
