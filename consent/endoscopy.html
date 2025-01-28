@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inpatient Consent Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <style>
+        body {
+            font-size: 20px;
+            overflow-x: hidden;
+            /* Prevents horizontal scrolling */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header,
+        .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            overflow-x: hidden;
+        }
+
+        .form-title {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .signature-pad {
+            width: 100%;
+            height: 200px;
+
+        }
+
+        textarea:focus,
+        input:focus {
+            outline: none;
+        }
+
+        *:focus {
+            box-shadow: none !important;
+        }
+
+        input {
+            font-weight: 600 !important;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .d-inline1 {
+            border-radius: 0px;
+            border: none;
+            outline: none;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .form-control {
+            color: #000000 !important;
+        }
+
+        .form-group {
+            margin-bottom: 0px !important;
+            flex-wrap: nowrap;
+        }
+
+        .d-inline {
+            border-radius: 0px;
+            border: none;
+            outline: none;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        /* Media queries for different screen sizes */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .signature-pad {
+                height: 150px;
+            }
+
+            #saveBtn,
+            #cltBtn {
+                bottom: 5px;
+                right: 5px;
+            }
+        }
+
+        input[type="checkbox"] {
+            width: 30px;
+            height: 20px;
+            accent-color: #000000;
+        }
+
+        td {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="header">
+
+            <img src="endo-header.png" alt="Saveetha Medical College & Hospital Logo" class="img-fluid">
+        </div>
+        <div class="form-title">
+
+        </div>
+        <div class="content" style="margin: 40px;">
+
+            <form>
+
+                <table>
+                    
+                    <tr>
+                        <td colspan="6"><b>Patient Name: </b><input oninput="this.value = this.value.toUpperCase()" autofocus
+                                type="text" style="min-width:20em" class="form-control d-inline w-auto custom-input"
+                                colspan="3" name="patient_name"></td>
+
+                    </tr>
+                    <tr>
+                        <td><b> PID:</b></td>
+                        <td><input oninput="this.value = this.value.toUpperCase()" style="min-width:20em"
+                                class="form-control d-inline w-auto custom-input" type="text" name="pid"></td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td><b> Age:</b></td>
+                                    <td><input class="form-control d-inline " name="age"
+                                            style="width:75px;font-size: 19px;" type="number"></td>
+                                    <td><b> Gender:&nbsp;&nbsp;</b></td>
+                                    <td>
+                                        <div id="genderselect"><b> Male / <s>Female</s></b></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b> Consultant:</b></td>
+                        <td><input oninput="this.value = this.value.toUpperCase()" style="min-width:20em"
+                                class="form-control d-inline w-auto custom-input" type="text" name="consultant"></td>
+                        <td style="white-space: nowrap;                "><b> Ward: </b><input
+                                oninput="this.value = this.value.toUpperCase()" style="min-width:20em"
+                                class="form-control d-inline w-auto custom-input" type="text" name="ward" /></td>
+                    </tr>
+                    <tr>
+
+                        <td style="padding-top: 20px;padding-bottom: 20px;"><b>Type:</b></td>
+                        <td colspan="4">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="GASTRO">
+                                <label class="form-check-label" for="inlineCheckbox1"><b>GASTRO</b></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="COLON">
+                                <label class="form-check-label" for="inlineCheckbox2"><b>COLON</b></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="ERCP">
+                                <label class="form-check-label" for="inlineCheckbox3"><b>ERCP</b></label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <div class="form-group">
+                    <p align="justify">
+                    <p>I/ Patient was examined by medical experts and advised to undergo an endoscopic examination.</p>
+                    <p>I hereby give wholehearted support for undergoing the endoscopic procedure. I also declare that,
+                        despite safety measures, in the event of any untoward incident occurring during the procedure,
+                        Saveetha Medical College Hospital doctors, staff, and nurses will not be held responsible.</p>
+
+                </div>
+
+                <div style="margin-left: -15px;" class="form-group">
+                    <canvas id="signature-pad" style="touch-action: none; user-select: none;"
+                        class="signature-pad"></canvas>
+                </div>
+                <b>
+                    <div class="form-group" id="final">
+                        <table>
+                            <tr>
+                                <td>Patient/ Relative's Signature:</td>
+                                <td>Doctor's Signature:</td>
+                            </tr>
+                            <tr>
+                                <td>Name: <input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:10em;width: min-content;" class="d-inline w-auto custom-input"
+                                        type="text" name="nam"></td>
+                                <td>Name: <input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:10em;width: min-content;" class="d-inline w-auto custom-input"
+                                        type="text" name="nam"></td>
+                            </tr>
+                            <tr>
+                                <td>Relationship: <input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:1em;width: min-content;" class="d-inline w-auto custom-input"
+                                        type="text" name="Relationship"></td>
+                                <td>Reg. No: <input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:1em;width: min-content;" class="d-inline w-auto custom-input"
+                                        type="text" name="Relationship"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row"> <div class="col-md-2"> 
+                                        Date:
+                                    </div><div class="col-md-6">
+                                        <input
+                                        type="date" class="form-control d-inline1" id="date1"
+                                        style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                    </div>  </div>
+                                    </td>
+                                <td>
+                                    <div class="row"> <div class="col-md-2"> 
+                                        Date:
+                                    </div><div class="col-md-6">
+                                        <input
+                                        type="date" class="form-control d-inline1" id="date"
+                                        style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                    </div>  </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row"> <div class="col-md-2"> 
+                                        Time:
+                                    </div><div class="col-md-6">
+                                        <input
+                                        type="time" class="form-control d-inline1" id="time"
+                                        style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                    </div>  </div>
+                                   </td>
+                                <td> <div class="row"> <div class="col-md-2"> 
+                                    Time:
+                                </div><div class="col-md-6">
+                                    <input
+                                    type="time" class="form-control d-inline1" id="time1"
+                                    style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                </div>  </div></td>
+                            </tr>
+                        </table>
+                    </div>
+                </b>
+            </form>
+        </div>
+        </br></br></br></br></br></br>
+        <div class="footer">
+            <img src="footer.png" alt="SIMATS Logo" class="img-fluid">
+        </div>
+        <div class="text-center my-4">
+            <button id="cltBtn" class="btn btn-danger">Clear sign</button>
+            <button id="saveBtn" class="btn btn-success">Save as Image</button>
+
+        </div>
+    </div>
+
+    <script>
+
+        genderselect = document.getElementById('genderselect');
+
+        //on select strike out male female alternatively
+        let isMaleSelected = true;
+        genderselect.addEventListener('dblclick', function () {
+            if (isMaleSelected) {
+                genderselect.innerHTML = '<b><s>Male</s> / Female</b>';
+            } else {
+                genderselect.innerHTML = '<b>Male / <s>Female</s></b>';
+            }
+            isMaleSelected = !isMaleSelected;
+
+
+        });
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            var saveBtn = document.getElementById('saveBtn');
+            var cltBtn = document.getElementById('cltBtn');
+
+            saveBtn.classList.add('hide');
+            cltBtn.classList.add('hide');
+
+            html2canvas(document.getElementById('container'), { scale: 2 }).then(canvas => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+
+                const today = new Date().toISOString().split('T')[0];
+                const patientName = document.getElementById('patientName').value;
+                const fileName = `${today}-${patientName}.png`;
+
+                link.href = image;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                saveBtn.classList.remove('hide');
+                cltBtn.classList.remove('hide');
+            });
+        });
+
+        var canvas = document.getElementById('signature-pad');
+        var signaturePad = new SignaturePad(canvas, { backgroundColor: 'rgb(255, 255, 255)' });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            document.getElementById('date1').value = today;
+        });
+
+        document.getElementById('cltBtn').addEventListener('click', function () {
+            signaturePad.clear();
+        });
+
+
+        function resizeSignature() {
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            signaturePad.fromData(signaturePad.toData());
+        }
+
+        function roundToNearest10Minutes(date) {
+            const minutes = Math.round(date.getMinutes() / 10) * 10;
+            date.setMinutes(minutes);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            return date;
+        }
+
+        function setDefaultTime() {
+            const timeInput = document.getElementById('time');
+            const timeInput1 = document.getElementById('time1');
+            const currentTime = new Date();
+            const roundedTime = roundToNearest10Minutes(currentTime);
+            const hours = String(roundedTime.getHours()).padStart(2, '0');
+            const minutes = String(roundedTime.getMinutes()).padStart(2, '0');
+            //const minutes1 = String(roundedTime.getMinutes() + 10).padStart(2, '0');
+            //const minutes1 = String(roundedTime.getMinutes() + returnRandom(5, 35)).padStart(2, '0');
+            //minutes1 = minutes + random time of 5-35 min and verify if it is less than 60 then add one hour to hours
+           
+            
+
+            timeInput.value = `${hours}:${minutes}`;
+            let minutes1 = String(roundedTime.getMinutes() + returnRandom(5, 35)).padStart(2, '0');
+            if (minutes1 >= 60) {
+                minutes1 = minutes1 - 60;
+                hours = String(roundedTime.getHours() + 1).padStart(2, '0');
+            }
+            timeInput1.value = `${hours}:${minutes1}`;
+        }
+        function returnRandom(minval, maxval) {
+            var randval = minval + (Math.random() * (maxval - minval));
+            return Math.round(randval);
+
+        }
+        function resizeCanvas() {
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+        }
+
+        window.orientationchange = resizeCanvas;
+        resizeCanvas();
+        setDefaultTime();
+
+        function convertTo12HourFormat(time) {
+            let [hours, minutes] = time.split(':');
+            hours = parseInt(hours);
+            const period = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            return `${hours}:${minutes} ${period}`;
+        }
+    </script>
+</body>
+
+</html>
