@@ -209,68 +209,117 @@
                         class="signature-pad"></canvas>
                 </div>
                 <b>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                               
+                        Patient/Relative's Signature
+                        <form class="form-horizontal">
+                            <div class="form-group form-inline">
+                                <label for="patientName">Name:</label>
+                                <input type="text"  oninput="this.value = this.value.toUpperCase()" class="form-control d-inline w-auto custom-input" id="patientName" placeholder="Enter name">
+                            </div>
+                            <div class="form-group  form-inline">
+                                <label for="relationship">Relationship:</label>
+                                <input type="text"  oninput="this.value = this.value.toUpperCase()" class="form-control d-inline w-auto custom-input" id="relationship" placeholder="Enter relationship">
+                            </div>
+                            <div class="form-group  form-inline">
+                                <label for="date">Date:</label>
+                                <input type="date" class="form-control d-inline w-auto custom-input" id="date" >
+                            </div>
+                            <div class="form-group  form-inline">
+                                <label for="time">Time:</label>
+                                <input type="time" class="form-control d-inline w-auto custom-input" id="time" >
+                            </div>
+                        </form>
+                        </div>
+                        <div class="col-md-6">
+                        Doctor's Signature
+                        <form>
+                            <div class="form-group form-inline">
+                                <label for="doctorName">Name:</label>
+                                <input type="text"  oninput="this.value = this.value.toUpperCase()" class="form-control d-inline w-auto custom-input" id="doctorName" placeholder="Enter name">
+                            </div>
+                            <div class="form-group form-inline">
+                                <label for="regNo">Reg. No:</label>
+                                <input type="text"  oninput="this.value = this.value.toUpperCase()" class="form-control d-inline w-auto custom-input" id="regNo" placeholder="Enter registration number">
+                            </div>
+                            <div class="form-group form-inline">
+                                <label for="doctorDate">Date:</label>
+                                <input type="date" class="form-control d-inline w-auto custom-input" id="date1"    >
+                            </div>
+                            <div class="form-group form-inline">
+                                <label for="doctorTime">Time:</label>
+                                <input type="time" class="form-control d-inline w-auto custom-input" id="time1" >
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <!--
                     <div class="form-group" id="final">
+                        
                         <table class="spacetb">
                             <tr>
-                                <td>Patient/ Relative's Signature:</td>
-                                <td>Doctor's Signature:</td>
+                                <td colspan="2">Patient/ Relative's Signature:</td>
+                                <td colspan="2">Doctor's Signature:</td>
                             </tr>
                             <tr>
-                                <td> <label class="form-check-label" for="inlineCheckbox1"><b></b>Name: </b></label><input id="patientName" oninput="this.value = this.value.toUpperCase()"
-                                        style="min-width:10em;width: min-content;" class="d-inline w-auto custom-input"
+                                <td colspan="2"> <label class="form-check-label" for="inlineCheckbox1"><b></b>Name: </b></label><input id="patientName" oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:10em;width: min-content;" class="form-control d-inline w-auto custom-input"
                                         type="text" name="nam"></td>
-                                <td> <label class="form-check-label" for="inlineCheckbox1"><b></b>Name: </b></label><input oninput="this.value = this.value.toUpperCase()"
-                                        style="min-width:10em;width: min-content;" class="d-inline w-auto custom-input"
+                                <td colspan="2">  <label class="form-check-label" for="inlineCheckbox1"><b></b>Name: </b></label><input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:10em;width: min-content;" class="form-control d-inline w-auto custom-input"
                                         type="text" name="nam"></td>
                             </tr>
                             <tr>
-                                <td> <label class="form-check-label" for="inlineCheckbox1"><b></b>Relationship: </b></label><input oninput="this.value = this.value.toUpperCase()"
-                                        style="min-width:1em;width: min-content;" class="d-inline w-auto custom-input"
+                                <td colspan="2"> <label class="form-check-label" for="inlineCheckbox1"><b></b>Relationship: </b></label><input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:1em;width: min-content;" class="form-control d-inline w-auto custom-input"
                                         type="text" name="Relationship"></td>
-                                <td> <label class="form-check-label" for="inlineCheckbox1"><b></b>Reg. No: </b></label><input oninput="this.value = this.value.toUpperCase()"
-                                        style="min-width:1em;width: min-content;" class="d-inline w-auto custom-input"
+                                <td colspan="2"> <label class="form-check-label" for="inlineCheckbox1"><b></b>Reg. No: </b></label><input oninput="this.value = this.value.toUpperCase()"
+                                        style="min-width:1em;width: min-content;" class="form-control d-inline w-auto custom-input"
                                         type="text" name="Relationship"></td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="2">
                                     <div class="row"> <div class="col-md-2"> 
                                         <label class="form-check-label" for="inlineCheckbox1"><b> Date:</b></label>
                                     </div><div class="col-md-6">
                                         <input
-                                        type="date" class="form-control d-inline1" id="date1"
-                                        style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                        type="date" class="form-control d-inline  w-auto custom-input" id="date1"
+                                        style="width: 10em;">
                                     </div>  </div>
                                     </td>
-                                <td>
+                                <td colspan="2">
                                     <div class="row"> <div class="col-md-2"> 
                                         <label class="form-check-label" for="inlineCheckbox1"><b>  Date:</b></label>
                                     </div><div class="col-md-6">
                                         <input
-                                        type="date" class="form-control d-inline1" id="date"
-                                        style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                        type="date" class="form-control d-inline  w-auto custom-input" id="date"
+                                        style="width: 10em;">
                                     </div>  </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="row"> <div class="col-md-2"> 
+                                    
                                         <label class="form-check-label" for="inlineCheckbox1"><b>  Time:</b></label>
-                                    </div><div class="col-md-6">
+                                    </td>
+                                    <td>
                                         <input
-                                        type="time" class="form-control d-inline1" id="time"
-                                        style="width: 10em;padding-bottom: 15px;font-size: 18px;">
-                                    </div>  </div>
+                                        type="time" class="form-control d-inline  w-auto custom-input" id="time"
+                                        style="width: 10em;">
+                                    
                                    </td>
                                 <td> <div class="row"> <div class="col-md-2"> 
                                     <label class="form-check-label" for="inlineCheckbox1"><b> Time:</b></label>
                                 </div><div class="col-md-6">
                                     <input
-                                    type="time" class="form-control d-inline1" id="time1"
-                                    style="width: 10em;padding-bottom: 15px;font-size: 18px;">
+                                    type="time" class="form-control d-inline  w-auto custom-input" id="time1"
+                                    style="width: 10em;">
                                 </div>  </div></td>
                             </tr>
                         </table>
-                    </div>
+                    </div>-->
                 </b>
             </form>
         </div>
@@ -361,7 +410,7 @@
             const timeInput1 = document.getElementById('time1');
             const currentTime = new Date();
             const roundedTime = roundToNearest10Minutes(currentTime);
-            const hours = String(roundedTime.getHours()).padStart(2, '0');
+            let hours = String(roundedTime.getHours()).padStart(2, '0');
             const minutes = String(roundedTime.getMinutes()).padStart(2, '0');
             //const minutes1 = String(roundedTime.getMinutes() + 10).padStart(2, '0');
             //const minutes1 = String(roundedTime.getMinutes() + returnRandom(5, 35)).padStart(2, '0');
@@ -370,11 +419,12 @@
             
 
             timeInput.value = `${hours}:${minutes}`;
-            let minutes1 = String(roundedTime.getMinutes() + returnRandom(5, 35)).padStart(2, '0');
+            let minutes1 = roundedTime.getMinutes() + returnRandom(5, 35);
             if (minutes1 >= 60) {
                 minutes1 = minutes1 - 60;
                 hours = String(roundedTime.getHours() + 1).padStart(2, '0');
             }
+            minutes1 = String(minutes1).padStart(2, '0');
             timeInput1.value = `${hours}:${minutes1}`;
         }
         function returnRandom(minval, maxval) {
